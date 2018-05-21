@@ -15,8 +15,8 @@ $('.append-photos').on('click', '.delete', deletePhoto);
   }
 }
 
-function displayPhotos(array) {
-    array.forEach(photo => {
+function displayPhotos(photosArray) {
+    photosArray.forEach(photo => {
       $('.append-photos').append(`
       <div class=${photo.id}>
         <div class='each-photo'>
