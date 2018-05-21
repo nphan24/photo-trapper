@@ -16,19 +16,23 @@ $('.append-photos').on('click', '.delete', deletePhoto);
 }
 
 function displayPhotos(array) {
-  array.forEach(photo => {
-    $('.append-photos').append(`
-    <div class=${photo.id}>
-      <div class='each-photo'>
-        <img src=${photo.url} class='each-image'></img>
-        <div class='flex'>
-          <h3 class='each-name'>${photo.name}</h3>
-          <img src='./assets/trash.svg' class='delete' alt='delete'/>
+  if (array.length > 0) {
+    array.forEach(photo => {
+      $('.append-photos').append(`
+      <div class=${photo.id}>
+        <div class='each-photo'>
+          <img src=${photo.url} class='each-image'></img>
+          <div class='flex'>
+            <h3 class='each-name'>${photo.name}</h3>
+            <img src='./assets/trash.svg' class='delete' alt='delete'/>
+          </div>
         </div>
-      </div>
-    </div>`);
-  }) 
-}
+      </div>`);
+    });
+  } else {
+    return [];
+  }
+};
 
 async function postPhotos (event) {
   event.preventDefault();
