@@ -78,5 +78,25 @@ describe('Testing endpoints', () => {
       });
   });
 
+  it('should return an error if invalid body is given', (done) => {
+      chai.request(app)
+      .post('/api/v1/photos')
+      .send({
+        'name': 'photo 5'
+      })
+      .end((error, response) => {
+        response.should.be.json;
+        response.should.have.status(406);
+        response.body.should.be.an('object');
+        response.body.should.have.property('error');
+        response.body.error.should.equal('Missing a Parameter');
+        done();
+      });
+  });
+
+  it('DELETE from the database', (done) => {
+    
+  })
+
 
 });
