@@ -95,8 +95,29 @@ describe('Testing endpoints', () => {
   });
 
   it('DELETE from the database', (done) => {
-    
-  })
+    chai.request(app)
+      .delete('/api/v1/photos')
+      .send({ id: 3 })
+      .end((error, response) => {
+        response.should.be.json;
+        response.should.have.status(200);
+        response.body.should.have.property('message');
+        response.body.message.should.equal('Photo deleted successfully');
+        done();
+      });
+  });
 
-
+  it('should return an error id unable to delete a photo', (done) => {
+    chai.request(app)
+      .delete('/api/v1/photos')
+      .send({ id: 'none' })
+      .end((error, response) => {
+        response.should.be.json;
+        response.should.have.status(500);
+        response.body.should.have.property('message');
+        response.body.should.have.property('error');
+        response.body.message.should.equal('Unable to delete photo');
+        done();
+      });
+  });
 });
