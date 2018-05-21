@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+input {
+  display: block;
+  margin: 0 auto;
+}
+
+.inputs {
+  text-align: center;
+}
+
+.append-photos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.each-photo {
+  width: 220px;
+  border: 1px solid black;
+  margin: 15px;
+}
+
+.each-image {
+  width: 220px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.each-name {
+  text-align: center;
+}
+
+.delete {
+  width: 30px;
+  height: 30px;
+  vertical-align: bottom;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
