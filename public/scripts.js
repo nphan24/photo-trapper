@@ -16,7 +16,6 @@ $('.append-photos').on('click', '.delete', deletePhoto);
 }
 
 function displayPhotos(array) {
-  if (array.length > 0) {
     array.forEach(photo => {
       $('.append-photos').append(`
       <div class=${photo.id}>
@@ -29,9 +28,6 @@ function displayPhotos(array) {
         </div>
       </div>`);
     });
-  } else {
-    return [];
-  }
 };
 
 async function postPhotos (event) {
