@@ -1,5 +1,8 @@
 body {
   margin: 0;
+  background-image: url('https://media.istockphoto.com/photos/green-grass-field-of-public-park-in-morning-light-picture-id613034406?k=6&m=613034406&s=612x612&w=0&h=2NHV9PN8DaW1nSDv3rqEM4CPSGxELwdmAhtsswFXb-o=');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 h1 {
@@ -8,11 +11,29 @@ h1 {
 
 input {
   display: block;
-  margin: 0 auto;
+  margin: 15px auto;
+  padding: 14px 10px 10px 10px;
+  width: 300px;
+  font-size: 32px;
+}
+
+.name::placeholder,
+.url::placeholder {
+  font-size: 32px;
 }
 
 .inputs {
   text-align: center;
+}
+
+.submit-btn {
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 1.5em;
+}
+
+.submit-btn:hover {
+  background-color: #00BFFF;
 }
 
 .append-photos {
@@ -25,6 +46,7 @@ input {
   width: 220px;
   border: 1px solid black;
   margin: 15px;
+  background-color: #fff;
 }
 
 .each-image {
@@ -41,6 +63,7 @@ input {
   width: 30px;
   height: 30px;
   vertical-align: bottom;
+  padding-top: 10px;
 }
 
 .flex {
@@ -48,4 +71,5 @@ input {
   justify-content: center;
   flex-wrap: wrap;
   justify-content: space-around;
+  background-color: #fff;
 }
