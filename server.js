@@ -24,8 +24,9 @@ app.get('/api/v1/photos', (request, response) => {
 
 app.post('/api/v1/photos', (request, response) => {
   const photo = request.body;
+  console.log('body', request.body);
 
-  if (!photo.name || photo.url ) {
+  if (!photo.name || !photo.url ) {
     return response.status(406).send({error: 'Missing a Parameter'})
   }
 
