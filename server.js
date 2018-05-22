@@ -27,7 +27,7 @@ app.post('/api/v1/photos', (request, response) => {
   console.log('body', request.body);
 
   if (!photo.name || !photo.url ) {
-    return response.status(406).send({error: 'Missing a Parameter'})
+    return response.status(422).send({error: 'Missing a Parameter'})
   }
 
   db('photos').insert(photo, 'id')
@@ -39,15 +39,19 @@ app.post('/api/v1/photos', (request, response) => {
     })
 });
 
-app.delete('/api/v1/photos', (request, response) => {
-  const id = request.body.id;
+app.delete('/api/v1/photos/:id', (request, response) => {
+  const id = request.params.id;
 
   db('photos').where('id', id).del()
-    .then(() => {
-      response.status(200).json({message: 'Photo deleted successfully'})
+    .then((photo) => {
+      if (photo) {
+        response.status(200).json({message: 'Photo deleted successfully'})
+      } else {
+        response.status(404).json({message: 'Unable to delete'})
+      }
     })
     .catch((error) => {
-      response.status(500).json({error: error, message: 'Unable to delete photo'})
+      response.status(500).json({ error: error })
     })
 });
 

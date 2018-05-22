@@ -46,9 +46,18 @@ async function postPhotos (event) {
     });
     const photoId = await response.json();
 
+    $('.append-photos').append(`
+      <div class=${photoId}>
+        <div class='each-photo'>
+          <img src=${photoUrl} class='each-image'></img>
+          <div class='flex'>
+            <h3 class='each-name'>${photoName}</h3>
+            <img src='./assets/trash.svg' class='delete' alt='delete'/>
+          </div>
+        </div>
+      </div>`);
     $('.name').val('');
     $('.url').val('');
-    location.reload();
     return photoId;
   } catch (error) {
     console.log('error posting photo', error )
@@ -58,15 +67,11 @@ async function postPhotos (event) {
 async function deletePhoto () {
   const deletePhotoId = $(this).parent().parent().parent('div')[0].className;
 
-  console.log($(this).parent().parent().parent('div')[0].className);
+  console.log(deletePhotoId);
 
   try {
-    await fetch('/api/v1/photos', {
-      method: 'DELETE',
-      body: JSON.stringify({
-        id: deletePhotoId
-      }),
-      headers: { 'Content-Type': 'application/json'}
+    await fetch(`/api/v1/photos/${deletePhotoId}`, {
+      method: 'DELETE'
     })
     $(this).parent().parent().parent().remove();
   } catch (error) {
