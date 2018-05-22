@@ -86,7 +86,7 @@ describe('Testing endpoints', () => {
       })
       .end((error, response) => {
         response.should.be.json;
-        response.should.have.status(406);
+        response.should.have.status(422);
         response.body.should.be.an('object');
         response.body.should.have.property('error');
         response.body.error.should.equal('Missing a Parameter');
@@ -96,8 +96,7 @@ describe('Testing endpoints', () => {
 
   it('DELETE from the database', (done) => {
     chai.request(app)
-      .delete('/api/v1/photos')
-      .send({ id: 3 })
+      .delete('/api/v1/photos/3')
       .end((error, response) => {
         response.should.be.json;
         response.should.have.status(200);
@@ -107,16 +106,25 @@ describe('Testing endpoints', () => {
       });
   });
 
-  it('should return an error id unable to delete a photo', (done) => {
+  it('should return an error, unable to delete a photo', (done) => {
     chai.request(app)
-      .delete('/api/v1/photos')
-      .send({ id: 'none' })
+      .delete('/api/v1/photos/4')
+      .end((error, response) => {
+        response.should.be.json;
+        response.should.have.status(404);
+        response.body.should.have.property('message');
+        response.body.message.should.equal('Unable to delete');
+        done();
+      });
+  });
+
+  it('should return an error if invalid endpoint', (done) => {
+    chai.request(app)
+      .delete('/api/v1/photos/nothing')
       .end((error, response) => {
         response.should.be.json;
         response.should.have.status(500);
-        response.body.should.have.property('message');
         response.body.should.have.property('error');
-        response.body.message.should.equal('Unable to delete photo');
         done();
       });
   });
