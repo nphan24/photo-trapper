@@ -3,7 +3,7 @@ fetchPhotos();
 $('.submit-btn').on('click', postPhotos);
 $('.append-photos').on('click', '.delete', deletePhoto);
 
- async function fetchPhotos () {
+async function fetchPhotos () {
   try {
     let response = await fetch('/api/v1/photos');
     let photosArray = await response.json();
@@ -47,7 +47,7 @@ async function postPhotos (event) {
     const photoId = await response.json();
 
     $('.append-photos').append(`
-      <div class=${photoId}>
+      <div class=${photoId.id}>
         <div class='each-photo'>
           <img src=${photoUrl} class='each-image'></img>
           <div class='flex'>
@@ -64,13 +64,11 @@ async function postPhotos (event) {
   }
 }
  
-async function deletePhoto () {
-  const deletePhotoId = $(this).parent().parent().parent('div')[0].className;
-
-  console.log(deletePhotoId);
+async function deletePhoto (event) {
+  const deletePhotoId = $(this).parent().parent().parent().attr('class');
 
   try {
-    await fetch(`/api/v1/photos/${deletePhotoId}`, {
+      await fetch(`/api/v1/photos/${deletePhotoId}`, {
       method: 'DELETE'
     })
     $(this).parent().parent().parent().remove();

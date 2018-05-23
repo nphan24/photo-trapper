@@ -24,7 +24,6 @@ app.get('/api/v1/photos', (request, response) => {
 
 app.post('/api/v1/photos', (request, response) => {
   const photo = request.body;
-  console.log('body', request.body);
 
   if (!photo.name || !photo.url ) {
     return response.status(422).send({error: 'Missing a Parameter'})
@@ -44,7 +43,7 @@ app.delete('/api/v1/photos/:id', (request, response) => {
 
   db('photos').where('id', id).del()
     .then((photo) => {
-      if (photo) {
+      if (photo > 0) {
         response.status(200).json({message: 'Photo deleted successfully'})
       } else {
         response.status(404).json({message: 'Unable to delete'})
